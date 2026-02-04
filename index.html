@@ -3,45 +3,148 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Trending News Aggregator</title>
+    <title>TechPulse | Daily Brief</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
     <style>
-        body { font-family: sans-serif; max-width: 800px; margin: 0 auto; padding: 20px; }
-        h1 { color: #333; }
-        .news-item { border-bottom: 1px solid #eee; padding: 10px 0; }
-        .news-title { font-weight: bold; font-size: 1.2em; }
-        .news-summary { color: #666; margin: 5px 0; }
-        .source { font-size: 0.8em; color: #999; }
-        .timestamp { font-size: 0.8em; color: #888; margin-top: 20px; font-style: italic; }
+        :root {
+            --bg: #0f1115;
+            --card-bg: #161b22;
+            --text: #e6edf3;
+            --text-muted: #8b949e;
+            --accent: #00f2ff;
+            --border: #30363d;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: var(--bg);
+            color: var(--text);
+            margin: 0;
+            padding: 0;
+            line-height: 1.6;
+        }
+
+        header {
+            background: rgba(15, 17, 21, 0.8);
+            backdrop-filter: blur(10px);
+            padding: 20px 0;
+            position: sticky;
+            top: 0;
+            border-bottom: 1px solid var(--border);
+            z-index: 100;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        .brand {
+            font-weight: 800;
+            font-size: 1.5rem;
+            color: var(--text);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .brand span { color: var(--accent); }
+
+        .last-updated {
+            font-size: 0.8rem;
+            color: var(--text-muted);
+            margin-top: 5px;
+        }
+
+        main { padding: 40px 0; }
+
+        .news-grid {
+            display: grid;
+            gap: 20px;
+        }
+
+        .news-card {
+            background: var(--card-bg);
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            padding: 24px;
+            transition: transform 0.2s, border-color 0.2s;
+        }
+
+        .news-card:hover {
+            transform: translateY(-2px);
+            border-color: var(--accent);
+        }
+
+        .news-title {
+            margin: 0 0 10px 0;
+            font-size: 1.25rem;
+            font-weight: 600;
+            color: var(--text);
+        }
+
+        .news-summary {
+            color: var(--text-muted);
+            font-size: 0.95rem;
+            margin-bottom: 15px;
+        }
+
+        .news-meta {
+            font-size: 0.8rem;
+            color: var(--text-muted);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .tag {
+            background: #238636;
+            color: #fff;
+            padding: 2px 8px;
+            border-radius: 12px;
+            font-size: 0.7rem;
+            font-weight: 600;
+        }
+
+        footer {
+            text-align: center;
+            padding: 40px 0;
+            color: var(--text-muted);
+            font-size: 0.8rem;
+            border-top: 1px solid var(--border);
+            margin-top: 40px;
+        }
+
+        a { color: var(--accent); text-decoration: none; }
+        a:hover { text-decoration: underline; }
     </style>
 </head>
 <body>
-    <h1>📰 Daily Trends</h1>
-    <div id="news-container">
-        <div class="news-item">
-            <div class="news-title"><a href="https://www.techradar.com/pro/ces-is-clear-people-want-tech-to-improve-their-everyday-lives" target="_blank" style="text-decoration: none; color: inherit;">CES is clear: People want tech to improve their everyday lives</a></div>
-            <div class="news-summary">CES makes headlines every year by showcasing the limitless potential of the industry. This year saw tech exhibitors move away from proof-of-concept announcements and towards real-world applications.</div>
-            <div class="source">TechRadar</div>
+    <header>
+        <div class="container">
+            <div class="brand">⚡ Tech<span>Pulse</span></div>
+            <div class="last-updated" id="timestamp">Updated: Just now</div>
         </div>
+    </header>
 
-        <div class="news-item">
-            <div class="news-title"><a href="https://www.networkworld.com/article/4126582/8-hot-networking-trends-for-2026.html" target="_blank" style="text-decoration: none; color: inherit;">8 hot networking trends for 2026</a></div>
-            <div class="news-summary">Ethernet becomes the de-facto standard for connecting GPUs within AI clusters and between AI clusters in the data center, marking a significant shift in networking technology.</div>
-            <div class="source">Network World</div>
+    <main class="container">
+        <div class="news-grid" id="news-container">
+            <!-- Loading State -->
+            <div class="news-card">
+                <h2 class="news-title">Initializing System...</h2>
+                <p class="news-summary">The agent is fetching the latest headlines from across the web. Please standby.</p>
+                <div class="news-meta">
+                    <span>System Status: <span style="color: #2ea043">Online</span></span>
+                </div>
+            </div>
         </div>
+    </main>
 
-        <div class="news-item">
-            <div class="news-title"><a href="https://techstartups.com/2026/02/04/top-tech-news-today-february-4-2026/" target="_blank" style="text-decoration: none; color: inherit;">Nvidia and OpenAI emphasizing partnership continuity</a></div>
-            <div class="news-summary">Nvidia and OpenAI are emphasizing partnership continuity amid market chatter about chip dissatisfaction and shifting investment dynamics in the AI hardware space.</div>
-            <div class="source">Tech Startups</div>
+    <footer>
+        <div class="container">
+            Automated by <a href="https://github.com/UnknownHITB">OpenClaw</a> • <a href="#">Advertise Here</a>
         </div>
-
-        <div class="news-item">
-            <div class="news-title"><a href="https://www.gadgets360.com/news" target="_blank" style="text-decoration: none; color: inherit;">Top OxygenOS 16 Features You Must Know</a></div>
-            <div class="news-summary">New updates and features coming to OnePlus phones with OxygenOS 16.</div>
-            <div class="source">Gadgets 360</div>
-        </div>
-
-        <p class="timestamp">Last updated: Wed Feb 4 2026</p>
-    </div>
+    </footer>
 </body>
 </html>
